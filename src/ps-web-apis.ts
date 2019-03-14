@@ -39,6 +39,9 @@ function requireApi<T>(name: string) : Promise<T> {
 
 export interface WhoamiV1 {
     isLoggedIn: () => boolean
+    doLogin: () => string
+    doRegister: () => string
+
 }
 
 export function whoamiV1() : Promise<WhoamiV1> {
