@@ -13,7 +13,7 @@ export interface WhoamiV1 {
      */
     authorizedFetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
     /**
-     * will assert valid not outdated session before fn is called
+     * will assert valid not outdated session before promise is resolved
      * an error is resolved if session is invalid and not refeshable (= user logged out)
      */
     ensureUserHasAuthorization(): Promise<void>;
