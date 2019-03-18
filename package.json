@@ -2,9 +2,9 @@
   "name": "ps-web-apis",
   "version": "1.0.0",
   "description": "",
-  "main":   "dist/ps-web-apis.cjs.js",
+  "main": "dist/ps-web-apis.cjs.js",
   "module": "dist/ps-web-apis.esm.js",
-  "types":  "dist/ps-web-apis.d.ts",
+  "types": "dist/ps-web-apis.d.ts",
   "scripts": {
     "build": "rollup -c",
     "test": "jest --coverage"
