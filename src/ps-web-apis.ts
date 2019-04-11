@@ -71,6 +71,10 @@ export interface WhoamiV1 {
      * will start logout-process (e.g. go to sso-logout)
      */
     doLogout(additionalParameter?: Map<String, String[]>): void
+    /**
+     * will update access token and therefore content entitlements to current state 
+     */
+    forceAccessTokenRefresh(): Promise<void>
 }
 
 export function whoamiV1() : Promise<WhoamiV1> {
