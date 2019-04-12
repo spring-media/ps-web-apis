@@ -20,14 +20,18 @@ export interface WhoamiV1 {
     /**
      * will start login-process (e.g. go to sso-login)
      */
-    doLogin(additonalParameter?: Map<String, String[]>): void;
+    doLogin(additionalParameter?: Map<String, String[]>): void;
     /**
     * will start registration-process (e.g. go to sso-register)
     */
-    doRegister(additonalParameter?: Map<String, String[]>): void;
+    doRegister(additionalParameter?: Map<String, String[]>): void;
     /**
      * will start logout-process (e.g. go to sso-logout)
      */
-    doLogout(additonalParameter?: Map<String, String[]>): void;
+    doLogout(additionalParameter?: Map<String, String[]>): void;
+    /**
+     * will update access token and therefore content entitlements to current state
+     */
+    forceAccessTokenRefresh(): Promise<void>;
 }
 export declare function whoamiV1(): Promise<WhoamiV1>;
