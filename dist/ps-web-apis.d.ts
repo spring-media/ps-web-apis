@@ -4,10 +4,6 @@ export interface WhoamiV1 {
     */
     isLoggedIn(): boolean;
     /**
-     * fn will be called after the state changed from logged to logged out or vice versa
-     */
-    onStateChange(fn: () => void): void;
-    /**
      * will assert valid not outdated session before fetch will be done. backend credentials will be added automatically
      * an error is resolved if session is invalid and not refeshable (= user logged out)
      */

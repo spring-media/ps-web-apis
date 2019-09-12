@@ -64,6 +64,10 @@ export interface WhoamiV1 {
      */
     doRegister(additionalParameter?: Map<String, String[]>): void
     /**
+     * will start logout-process (e.g. go to sso-logout)
+     */
+    doLogout(additionalParameter?: Map<String, String[]>): void
+    /**
      * will update access token and therefore content entitlements to current state 
      */
     forceAccessTokenRefresh(): Promise<void>
