@@ -1,0 +1,24 @@
+{
+    "defaultSeverity": "error",
+    "extends": ["tslint:latest", "tslint-react"],
+    "jsRules": {},
+    "rules": {
+        "ordered-imports": false,
+        "interface-name": false,
+        "interface-over-type-literal": false,
+        "trailing-comma": false,
+        "jsx-no-multiline-js": false,
+        "jsx-no-lambda": false,
+        "jsx-boolean-value": false,
+        "object-literal-sort-keys": false,
+        "object-literal-key-quotes": false,
+        "no-unused-expression": false,
+        "semicolon": [true, "always", "ignore-bound-class-methods"],
+        "prefer-for-of": false,
+        "no-submodule-imports": false,
+        "jsx-curly-spacing": false,
+        "max-line-length": [true, 140],
+        "arrow-parens": false
+    },
+    "rulesDirectory": []
+}
