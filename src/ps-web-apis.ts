@@ -1,7 +1,7 @@
 function requireApi<T>(name: string): Promise<T> {
     // -- START -- static loader
-    let unresolvedPackages = {} as any;
-    let providedPackages = {} as any;
+    const unresolvedPackages = {} as any;
+    const providedPackages = {} as any;
     const loaderName = "pssmasloader";
     // set or reuse existing loader implementation
     const loader = ((window as any)[loaderName] = (window as any)[loaderName] || {
@@ -26,8 +26,8 @@ function requireApi<T>(name: string): Promise<T> {
     });
     // -- END -- static loader
 
-    return new Promise(function(resolve, reject) {
-        loader.require(name, function(res: T, error: any) {
+    return new Promise((resolve, reject) => {
+        loader.require(name, (res: T, error: any) => {
             if (error) {
                 reject(error);
             } else {
@@ -39,14 +39,14 @@ function requireApi<T>(name: string): Promise<T> {
 
 export interface WhoamiV1 {
     /**
-     * gives information if user is currently loggedin from ui perspective
-     */
-    isLoggedIn(): boolean;
-    /**
      * will assert valid not outdated session before fetch will be done. backend credentials will be added automatically
      * an error is resolved if session is invalid and not refeshable (= user logged out)
      */
     authorizedFetch: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
+    /**
+     * gives information if user is currently loggedin from ui perspective
+     */
+    isLoggedIn(): boolean;
     /**
      * will assert valid not outdated session before promise is resolved
      * an error is resolved if session is invalid and not refeshable (= user logged out)
@@ -55,15 +55,15 @@ export interface WhoamiV1 {
     /**
      * will start login-process (e.g. go to sso-login)
      */
-    doLogin(additionalParameter?: Map<String, String[]>): void;
+    doLogin(additionalParameter?: Map<string, string[]>): void;
     /**
      * will start registration-process (e.g. go to sso-register)
      */
-    doRegister(additionalParameter?: Map<String, String[]>): void;
+    doRegister(additionalParameter?: Map<string, string[]>): void;
     /**
      * will start logout-process (e.g. go to sso-logout)
      */
-    doLogout(additionalParameter?: Map<String, String[]>): void;
+    doLogout(additionalParameter?: Map<string, string[]>): void;
     /**
      * will update access token and therefore content entitlements to current state
      */

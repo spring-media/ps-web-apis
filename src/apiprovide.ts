@@ -1,4 +1,4 @@
-export function provide(packageName: string, pack: any) {
+export function provide(packageNameActual: string, packActual: any) {
     // -- START -- static loader
     let unresolvedPackages = {} as any;
     let providedPackages = {} as any;
@@ -23,10 +23,10 @@ export function provide(packageName: string, pack: any) {
     providedPackages = loader._.p;
     // -- END -- static loader
 
-    var unresolvedRequires = unresolvedPackages[packageName] || [];
-    providedPackages[packageName] = pack;
-    for (var i = 0; i < unresolvedRequires.length; i++) {
-        unresolvedRequires[i](pack, null);
+    const unresolvedRequires = unresolvedPackages[packageNameActual] || [];
+    providedPackages[packageNameActual] = packActual;
+    for (let i = 0; i < unresolvedRequires.length; i++) {
+        unresolvedRequires[i](packActual, null);
     }
-    return pack;
+    return packActual;
 }
