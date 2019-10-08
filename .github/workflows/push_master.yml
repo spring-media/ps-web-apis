@@ -109,21 +109,10 @@ jobs:
         with:
           args: -c "bash ./pipelines/deploy.sh uat"
 
-  test_uat:
-    name: Test UAT
-    runs-on: ubuntu-latest
-    needs: deploy_uat
-    steps:
-      - name: Ghostinspector test UAT
-        env:
-          GHOSTINSPECTOR_APIKEY: ${{ secrets.GHOSTINSPECTOR_APIKEY }}
-        run: |
-          curl -s https://api.ghostinspector.com/v1/suites/5caddebf1e9d7d18efd832ec/execute/?apiKey=$GHOSTINSPECTOR_APIKEY | tee output | docker run -i stedolan/jq  'if .code != "SUCCESS" then error("Ghostinspector call failed") else .data[] | select(.passing == false) | error("Failing test: " + .name) end'
-
   deploy_prod:
     name: Deploy PROD
     runs-on: ubuntu-latest
-    needs: test_uat
+    needs: deploy_uat
     steps:
       - name: Checkout branch
         uses: actions/checkout@master
@@ -141,14 +130,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
           args: -c "bash ./pipelines/deploy.sh prod"
-
-  test_prod:
-    name: Test PROD
-    runs-on: ubuntu-latest
-    needs: deploy_prod
-    steps:
-      - name: Ghostinspector test PROD
-        env:
-          GHOSTINSPECTOR_APIKEY: ${{ secrets.GHOSTINSPECTOR_APIKEY }}
-        run: |
-          curl -s https://api.ghostinspector.com/v1/suites/5cadded51e9d7d18efd83339/execute/?apiKey=$GHOSTINSPECTOR_APIKEY | tee output | docker run -i stedolan/jq  'if .code != "SUCCESS" then error("Ghostinspector call failed") else .data[] | select(.passing == false) | error("Failing test: " + .name) end'
