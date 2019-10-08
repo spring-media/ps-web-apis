@@ -26,6 +26,10 @@ export interface WhoamiV1 {
      */
     doLogout(additionalParameter?: Map<String, String[]>): void;
     /**
+     * will start logout-process and redirect user to portal homepage afterwards (e.g. go to sso-logout)
+     */
+    doLogoutToHome(additionalParameter?: Map<String, String[]>): void;
+    /**
      * will update access token and therefore content entitlements to current state
      */
     forceAccessTokenRefresh(): Promise<void>;

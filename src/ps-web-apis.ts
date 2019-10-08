@@ -37,9 +37,6 @@ function requireApi<T>(name: string) : Promise<T> {
     })
 }
 
-
-
-
 export interface WhoamiV1 {	
     /** 
      * gives information if user is currently loggedin from ui perspective
@@ -67,6 +64,10 @@ export interface WhoamiV1 {
      * will start logout-process (e.g. go to sso-logout)
      */
     doLogout(additionalParameter?: Map<String, String[]>): void
+    /**
+     * will start logout-process and redirect user to portal homepage afterwards (e.g. go to sso-logout)
+     */
+    doLogoutToHome(additionalParameter?: Map<String, String[]>): void
     /**
      * will update access token and therefore content entitlements to current state 
      */
