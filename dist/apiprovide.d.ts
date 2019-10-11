@@ -1,1 +1,1 @@
-export declare function provide(packageName: string, pack: any): any;
+export declare function provide(packageNameActual: string, packActual: any): any;

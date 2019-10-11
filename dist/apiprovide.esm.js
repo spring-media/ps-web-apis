@@ -1,12 +1,12 @@
-function provide(packageName, pack) {
+function provide(packageNameActual, packActual) {
     // -- START -- static loader
     var unresolvedPackages = {};
     var providedPackages = {};
-    var loaderName = 'pssmasloader';
-    var loader = window[loaderName] = window[loaderName] || {
+    var loaderName = "pssmasloader";
+    var loader = (window[loaderName] = window[loaderName] || {
         _: {
             u: unresolvedPackages,
-            p: providedPackages,
+            p: providedPackages
         },
         require: function (packageName, cb) {
             var pack = providedPackages[packageName];
@@ -17,17 +17,17 @@ function provide(packageName, pack) {
                 unresolvedPackages[packageName] = unresolvedPackages[packageName] || [];
                 unresolvedPackages[packageName].push(cb);
             }
-        },
-    };
+        }
+    });
     unresolvedPackages = loader._.u;
     providedPackages = loader._.p;
     // -- END -- static loader
-    var unresolvedRequires = unresolvedPackages[packageName] || [];
-    providedPackages[packageName] = pack;
+    var unresolvedRequires = unresolvedPackages[packageNameActual] || [];
+    providedPackages[packageNameActual] = packActual;
     for (var i = 0; i < unresolvedRequires.length; i++) {
-        unresolvedRequires[i](pack, null);
+        unresolvedRequires[i](packActual, null);
     }
-    return pack;
+    return packActual;
 }
 
 export { provide };

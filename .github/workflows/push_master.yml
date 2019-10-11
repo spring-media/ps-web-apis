@@ -1,0 +1,46 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  checks:
+    name: Formatting checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@master
+
+      - name: Install npm
+        uses: actions/npm@master
+        with:
+          args: install
+
+      - name: Npm check
+        uses: actions/npm@master
+        with:
+          args: run check --if-present
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@master
+
+
+      - name: Install npm
+        uses: actions/npm@master
+        with:
+          args: install
+
+      - name: Test npm
+        uses: actions/npm@master
+        with:
+          args: run test
+
+      - name: Build npm
+        uses: actions/npm@master
+        with:
+          args: run build
