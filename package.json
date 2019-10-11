@@ -30,7 +30,6 @@
     "@types/cookie": "^0.3.2",
     "@types/jest": "^24.0.9",
     "@types/sinon": "^7.0.8",
-    "format": "^0.2.2",
     "jest": "^24.1.0",
     "prettier": "^1.18.2",
     "rollup": "^1.4.0",
