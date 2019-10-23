@@ -18,18 +18,20 @@ jobs:
       - name: Checkout branch
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/checkout@master
+        
+      - name: Set Node.js 10.x
+        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
 
       - name: Install npm
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/npm@master
-        with:
-          args: install
+        run: npm install
 
-      - name: Npm check
+      - name: Npm format-check
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/npm@master
-        with:
-          args: run check --if-present
+        run: npm run check
 
   build:
     name: Build
@@ -52,20 +54,20 @@ jobs:
           git config --global user.email "ps-support-og@moveoffice.com"
           git merge ${{ github.event.pull_request.head.sha }} -m"prchecker" --stat
 
+      - name: Set Node.js 10.x
+        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+
       - name: Install npm
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/npm@master
-        with:
-          args: install
+        run: npm install
 
       - name: Test npm
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/npm@master
-        with:
-          args: run test
+        run: npm run test
 
       - name: Build npm
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/npm@master
-        with:
-          args: run build
+        run: npm run build
