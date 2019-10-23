@@ -80,7 +80,7 @@ export interface WhoamiV1 {
     forceAccessTokenRefresh(): Promise<void>;
     /**
      * will request userinfo from whoami backend
-     * @return {UserInfo} some relevant userdata
+     * @return {WhoamiUserInfo} some relevant userdata
      */
     getUserInfo(): Promise<WhoamiUserInfo>;
 }
