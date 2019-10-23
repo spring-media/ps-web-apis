@@ -12,15 +12,16 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@master
 
-      - name: Install npm
-        uses: actions/npm@master
+      - name: Set Node.js 10.x
+        uses: actions/setup-node@v1
         with:
-          args: install
+          node-version: '10.x'
 
-      - name: Npm check
-        uses: actions/npm@master
-        with:
-          args: run check --if-present
+      - name: Install npm
+        run: npm install
+
+      - name: Npm format-check
+        run: npm run check --if-present
 
   build:
     name: Build
@@ -29,18 +30,16 @@ jobs:
       - name: Checkout branch
         uses: actions/checkout@master
 
+      - name: Set Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
 
       - name: Install npm
-        uses: actions/npm@master
-        with:
-          args: install
+        run: npm install
 
       - name: Test npm
-        uses: actions/npm@master
-        with:
-          args: run test
+        run: npm run test
 
       - name: Build npm
-        uses: actions/npm@master
-        with:
-          args: run build
+        run: npm run build

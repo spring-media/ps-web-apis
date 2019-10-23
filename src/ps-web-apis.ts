@@ -37,6 +37,12 @@ function requireApi<T>(name: string): Promise<T> {
     });
 }
 
+export interface WhoamiUserInfo {
+    user_id: string;
+    first_name?: string;
+    last_name?: string;
+}
+
 export interface WhoamiV1 {
     /**
      * will assert valid not outdated session before fetch will be done. backend credentials will be added automatically
@@ -72,6 +78,11 @@ export interface WhoamiV1 {
      * will update access token and therefore content entitlements to current state
      */
     forceAccessTokenRefresh(): Promise<void>;
+    /**
+     * will request userinfo from whoami backend
+     * @return {WhoamiUserInfo} some relevant userdata
+     */
+    getUserInfo(): Promise<WhoamiUserInfo>;
 }
 
 export function whoamiV1(): Promise<WhoamiV1> {

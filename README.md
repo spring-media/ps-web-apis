@@ -4,7 +4,7 @@ ps-web-apis is a client side library to interface with ps services on ps support
 
 # Installation
 
-`npm install --save github:spring-media/ps-web-apis#v1.4.0`
+`npm install --save github:spring-media/ps-web-apis#v1.6.0`
 
 # Usage
 
