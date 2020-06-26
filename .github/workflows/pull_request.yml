@@ -18,7 +18,7 @@ jobs:
       - name: Checkout branch
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/checkout@master
-        
+
       - name: Set Node.js 10.x
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/setup-node@v1
@@ -31,7 +31,9 @@ jobs:
 
       - name: Npm format-check
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        run: npm run check
+        run: |
+          echo "hi from boldreh"
+          npm run check
 
   build:
     name: Build
