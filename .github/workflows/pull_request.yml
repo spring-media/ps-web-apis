@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout branch
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/checkout@master
+        uses: actions/checkout@v1.2.0
         
       - name: Set Node.js 10.x
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
@@ -27,7 +27,7 @@ jobs:
 
       - name: Install npm
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        run: npm install
+        run: npm ci
 
       - name: Npm format-check
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
@@ -39,11 +39,11 @@ jobs:
     steps:
       - name: Checkout branch
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/checkout@master
+        uses: actions/checkout@v1.2.0
 
       - name: Checkout master
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/checkout@master
+        uses: actions/checkout@v1.2.0
         with:
           ref: master
 
@@ -62,7 +62,7 @@ jobs:
 
       - name: Install npm
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        run: npm install
+        run: npm ci
 
       - name: Test npm
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'

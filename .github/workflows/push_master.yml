@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        uses: actions/checkout@master
+        uses: actions/checkout@v1.2.0
 
       - name: Set Node.js 10.x
         uses: actions/setup-node@v1
@@ -18,7 +18,7 @@ jobs:
           node-version: '10.x'
 
       - name: Install npm
-        run: npm install
+        run: npm ci
 
       - name: Npm format-check
         run: npm run check --if-present
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        uses: actions/checkout@master
+        uses: actions/checkout@v1.2.0
 
       - name: Set Node.js 10.x
         uses: actions/setup-node@v1
@@ -36,7 +36,7 @@ jobs:
           node-version: '10.x'
 
       - name: Install npm
-        run: npm install
+        run: npm ci
 
       - name: Test npm
         run: npm run test
