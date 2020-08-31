@@ -86,7 +86,7 @@ export interface WhoamiV1 {
     /**
      * will request customer pseudo id for currently logged user from consent backend
      */
-    getCustomerId(additionalParameter?: Map<string, string[]>): Promise<string>;
+    getCustomerId(clientId: string, additionalParameter?: Map<string, string[]>): Promise<string>;
 }
 
 export function whoamiV1(): Promise<WhoamiV1> {
