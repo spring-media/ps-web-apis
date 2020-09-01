@@ -43,5 +43,10 @@ export interface WhoamiV1 {
      * @return {WhoamiUserInfo} some relevant userdata
      */
     getUserInfo(): Promise<WhoamiUserInfo>;
+    /**
+     * will request customer pseudo id for currently logged user from consent backend
+     * @param clientId The string identifier of the client for which the customer id is requested.
+     */
+    getCustomerId(clientId: string): Promise<string>;
 }
 export declare function whoamiV1(): Promise<WhoamiV1>;
