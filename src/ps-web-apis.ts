@@ -1,3 +1,5 @@
+import { TealiumData } from "./model";
+
 function requireApi<T>(name: string): Promise<T> {
     // -- START -- static loader
     const unresolvedPackages = {} as any;
@@ -92,4 +94,12 @@ export interface WhoamiV1 {
 
 export function whoamiV1(): Promise<WhoamiV1> {
     return requireApi("whoami:v1");
+}
+
+export interface RosettaV1 {
+    trackEvent(event: TealiumData): void;
+}
+
+export function rosettaV1(): Promise<RosettaV1> {
+    return requireApi("rosetta:v1");
 }
