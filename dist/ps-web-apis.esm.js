@@ -39,5 +39,8 @@ function requireApi(name) {
 function whoamiV1() {
     return requireApi("whoami:v1");
 }
+function rosettaV1() {
+    return requireApi("rosetta:v1");
+}
 
-export { whoamiV1 };
+export { whoamiV1, rosettaV1 };
