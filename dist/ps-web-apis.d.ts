@@ -1,3 +1,4 @@
+import { TealiumData } from "./model";
 export interface WhoamiUserInfo {
     user_id: string;
     first_name?: string;
@@ -50,3 +51,7 @@ export interface WhoamiV1 {
     getCustomerId(clientId: string): Promise<string>;
 }
 export declare function whoamiV1(): Promise<WhoamiV1>;
+export interface RosettaV1 {
+    trackEvent(event: TealiumData): void;
+}
+export declare function rosettaV1(): Promise<RosettaV1>;
