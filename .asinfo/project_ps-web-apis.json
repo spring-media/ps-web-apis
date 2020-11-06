@@ -1,0 +1,11 @@
+{
+    "name": "Premium Services Web APIs",
+    "type": "library",
+    "ownerIds": ["ps"],
+    "description":
+      "This application provides several signatures for web applications provided by our team. This needs to be interated in other js projects to use our web-apis like whoami-web.",
+    "code": "https://github.com/spring-media/ps-web-apis-web",
+    "usecases": ["acc-signin", "acc-signup", "acc-get-user-status", "tracking"],
+    "usage": [
+    ]
+  }
