@@ -43,9 +43,5 @@ function requireApi(name) {
 function whoamiV1() {
     return requireApi("whoami:v1");
 }
-function rosettaV1() {
-    return requireApi("rosetta:v1");
-}
 
 exports.whoamiV1 = whoamiV1;
-exports.rosettaV1 = rosettaV1;
