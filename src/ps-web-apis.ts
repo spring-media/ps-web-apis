@@ -45,6 +45,16 @@ export interface WhoamiUserInfo {
     last_name?: string;
 }
 
+export interface PurAsInfo {
+    expires: number;
+    logintime: number;
+    purchaseData: PurchaseData;
+}
+
+interface PurchaseData {
+    promotionIds: [string];
+}
+
 export interface WhoamiV1 {
     /**
      * will assert valid not outdated session before fetch will be done. backend credentials will be added automatically
@@ -90,6 +100,10 @@ export interface WhoamiV1 {
      * @param clientId The string identifier of the client for which the customer id is requested.
      */
     getCustomerId(clientId: string): Promise<string>;
+    /**
+     * will provide unsafe entitlement information
+     */
+    getPurAsInfo(): PurAsInfo;
 }
 
 export function whoamiV1(): Promise<WhoamiV1> {
