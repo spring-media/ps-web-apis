@@ -1,6 +1,6 @@
 {
   "name": "ps-web-apis",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "",
   "main": "dist/ps-web-apis.cjs.js",
   "module": "dist/ps-web-apis.esm.js",
