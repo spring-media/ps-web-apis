@@ -45,14 +45,8 @@ export interface WhoamiUserInfo {
     last_name?: string;
 }
 
-export interface PurAsInfo {
-    expires: number;
-    logintime: number;
-    purchaseData: PurchaseData;
-}
-
-interface PurchaseData {
-    promotionIds: [string];
+export interface PurchaseData {
+    entitlements: [string];
 }
 
 export interface WhoamiV1 {
@@ -103,7 +97,7 @@ export interface WhoamiV1 {
     /**
      * will provide unsafe entitlement information
      */
-    getPurAsInfo(): PurAsInfo;
+    getUnsafePurchaseData(): Promise<PurchaseData>;
 }
 
 export function whoamiV1(): Promise<WhoamiV1> {
