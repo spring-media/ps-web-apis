@@ -95,7 +95,7 @@ export interface WhoamiV1 {
      */
     getCustomerId(clientId: string): Promise<string>;
     /**
-     * will provide unsafe entitlement information
+     * will provide unsafe purchase data
      */
     getUnsafePurchaseData(): Promise<PurchaseData>;
 }
