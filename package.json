@@ -19,6 +19,10 @@
     "type": "git",
     "url": "git+https://github.com/spring-media/ps-web-apis.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/",
+    "access": "restricted"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
