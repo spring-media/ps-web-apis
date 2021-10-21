@@ -35,21 +35,17 @@ jobs:
         with:
           node-version: '10.x'
 
+      - name: config npm
+        run: |
+          npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
+        env:
+          GITHUB_TOKEN: ${{ secrets.PS_GITHUB_ACCESSTOKEN }}
+
       - name: Install npm
         run: npm ci
 
       - name: Test npm
         run: npm run test
-
-      - name: Patch version
-        run: |
-          git config --global user.name "Spring Media CD"
-          git config --global user.email "ps-support-og@moveoffice.com"
-          git remote add publisher "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          npm version patch -m "Automatically updated npm version to %s"
-          git push publisher HEAD:master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build npm
         run: npm run build
