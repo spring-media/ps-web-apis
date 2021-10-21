@@ -1,5 +1,5 @@
 {
-  "name": "ps-web-apis",
+  "name": "@spring-media/ps-web-apis",
   "version": "1.9.3",
   "description": "",
   "main": "dist/ps-web-apis.cjs.js",
