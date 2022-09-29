@@ -1,4 +1,4 @@
-import { TealiumData } from "./model";
+import { provide } from "./apiprovide";
 
 function requireApi<T>(name: string): Promise<T> {
     // -- START -- static loader
@@ -48,19 +48,20 @@ export interface WhoamiUserInfo {
 export interface PurchaseData {
     entitlements: [string];
 }
-
 export type FetchOptions = RequestInit & { timeout?: number };
+
+/**
+ * Custom fetch interface which includes the possibility to customize timeouts for fetch requests
+ */
+export type Fetch = (input: RequestInfo, init?: FetchOptions) => Promise<Response>;
 
 export interface WhoamiV1 {
     /**
      * will assert valid not outdated session before fetch will be done. backend credentials will be added automatically
      * an error is resolved if session is invalid and not refeshable (= user logged out)
+     * Important: as of version 1.9.9 all requests are timeout after 5s by default. Can be changed by adding the field timeout to the FetchOptions Interface
      */
-    authorizedFetch: (input: RequestInfo, init?: FetchOptions) => Promise<Response>;
-    /**
-     * Expose custom fetch instance with timeout possibilities via init.timeout
-     */
-    nonAuthorizedFetch: (input: RequestInfo, init?: FetchOptions) => Promise<Response>;
+    authorizedFetch: Fetch;
     /**
      * gives information if user is currently loggedin from ui perspective
      */
@@ -106,6 +107,16 @@ export interface WhoamiV1 {
     getUnsafePurchaseData(): Promise<PurchaseData>;
 }
 
+export interface UtilsV1 {
+    fetchWithTimeout: Fetch;
+}
+
 export function whoamiV1(): Promise<WhoamiV1> {
     return requireApi("whoami:v1");
 }
+
+export function utilsV1(): Promise<UtilsV1> {
+    return requireApi("utils:v1");
+}
+
+export const provideApi = provide;
