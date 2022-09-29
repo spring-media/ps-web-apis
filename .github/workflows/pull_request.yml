@@ -18,12 +18,12 @@ jobs:
       - name: Checkout branch
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/checkout@v1.2.0
-        
-      - name: Set Node.js 10.x
+
+      - name: Set Node.js 16
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: "16"
 
       - name: Install npm
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
@@ -54,11 +54,11 @@ jobs:
           git config --global user.email "ps-support-og@moveoffice.com"
           git merge ${{ github.event.pull_request.head.sha }} -m"prchecker" --stat
 
-      - name: Set Node.js 10.x
+      - name: Set Node.js 16
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/setup-node@v1
         with:
-          node-version: '10.x'
+          node-version: "16"
 
       - name: Install npm
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
