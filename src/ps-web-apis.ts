@@ -59,7 +59,8 @@ export interface WhoamiV1 {
     /**
      * will assert valid not outdated session before fetch will be done. backend credentials will be added automatically
      * an error is resolved if session is invalid and not refeshable (= user logged out)
-     * Important: as of version 1.9.9 all requests are timeout after 5s by default. Can be changed by adding the field timeout to the FetchOptions Interface
+     * Important: as of version 1.9.9 all requests are timeout after 5s by default.
+     * Can be changed by adding the field timeout to the FetchOptions Interface
      */
     authorizedFetch: Fetch;
     /**
