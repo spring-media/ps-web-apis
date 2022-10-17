@@ -68,6 +68,12 @@ export interface WhoamiV1 {
      */
     isLoggedIn(): boolean;
     /**
+     * gives information if the user is currently a C1 User. These are users which are not logged in from
+     * sso/mypass perspective. These users are originated from the apps and have potentially in app purchases.
+     * If this method resolves to true isLogged in will resolve to false.
+     */
+    isC1User(): boolean;
+    /**
      * will assert valid not outdated session before promise is resolved
      * an error is resolved if session is invalid and not refeshable (= user logged out)
      */
