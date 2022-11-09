@@ -1,5 +1,6 @@
 import sinon from "sinon";
-import { whoamiV1, WhoamiV1 } from "../src/ps-web-apis";
+import { whoamiV1 } from "../src/ps-web-apis";
+import { WhoamiV1 } from "../src/types/whoami";
 
 describe("whoami-api loader", () => {
     it("uses preexisting require to get the api if necessary", async () => {
