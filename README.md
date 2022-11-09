@@ -6,10 +6,10 @@ ps-web-apis is a client side library to interface with ps services on ps support
 
 `npm install --save @spring-media/ps-web-apis`
 
-Also needs [ps-rosetta](https://github.com/spring-media/ps-rosetta) to be present on the website:
+> **Note** Also needs [ps-rosetta](https://github.com/spring-media/ps-rosetta) to be present on the website:
 
 ```html
-<script type="text/javascript" src="https://rosetta.prod.ps.welt.de/ps-rosetta.js"></script>
+<script type="text/javascript" src="https://rosetta.prod.ps.(welt|bild).de/ps-rosetta.js"></script>
 ```
 
 # Usage
