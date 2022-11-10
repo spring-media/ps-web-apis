@@ -138,7 +138,11 @@ export type IConfig = {
     [key in IApp]: IAppConfig;
 };
 
-export type ICligV1 = (app: IApp) => Promise<{ open: (layer: ILayer) => void }>;
+export interface ICligV1 {
+    init: (app: IApp) => Promise<void>;
+    open: (layer: ILayer) => void;
+}
+export type ICligV2 = (app: IApp) => Promise<{ open: (layer: ILayer) => void }>;
 
 export function whoamiV1(): Promise<WhoamiV1> {
     return requirePackage("whoami:v1");
@@ -149,7 +153,10 @@ export function utilsV1(): Promise<UtilsV1> {
 }
 
 export function CligV1(): Promise<ICligV1> {
-    return requirePackage("clig:v1");
+    return requirePackage("ppclig:v1");
+}
+export function CligV2(): Promise<ICligV2> {
+    return requirePackage("clig:v2");
 }
 export const provideApi = provide;
 export const requireApi = requirePackage;
