@@ -149,7 +149,10 @@ export function utilsV1(): Promise<UtilsV1> {
 }
 
 export function CligV1(): Promise<ICligV1> {
-    return requirePackage("clig:v1");
+    return requirePackage("ppclig:v1");
+}
+export function CligV2(): Promise<ICligV1> {
+    return requirePackage("clig:v2");
 }
 export const provideApi = provide;
 export const requireApi = requirePackage;
