@@ -2,7 +2,39 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function requireApi(name) {
+function provide(packageNameActual, packActual) {
+    // -- START -- static loader
+    var unresolvedPackages = {};
+    var providedPackages = {};
+    var loaderName = "pssmasloader";
+    var loader = (window[loaderName] = window[loaderName] || {
+        _: {
+            u: unresolvedPackages,
+            p: providedPackages
+        },
+        require: function (packageName, cb) {
+            var pack = providedPackages[packageName];
+            if (pack !== undefined) {
+                cb(pack, null);
+            }
+            else {
+                unresolvedPackages[packageName] = unresolvedPackages[packageName] || [];
+                unresolvedPackages[packageName].push(cb);
+            }
+        }
+    });
+    unresolvedPackages = loader._.u;
+    providedPackages = loader._.p;
+    // -- END -- static loader
+    var unresolvedRequires = unresolvedPackages[packageNameActual] || [];
+    providedPackages[packageNameActual] = packActual;
+    for (var i = 0; i < unresolvedRequires.length; i++) {
+        unresolvedRequires[i](packActual, null);
+    }
+    return packActual;
+}
+
+function requirePackage(name) {
     // -- START -- static loader
     var unresolvedPackages = {};
     var providedPackages = {};
@@ -41,7 +73,23 @@ function requireApi(name) {
     });
 }
 function whoamiV1() {
-    return requireApi("whoami:v1");
+    return requirePackage("whoami:v1");
 }
+function utilsV1() {
+    return requirePackage("utils:v1");
+}
+function CligV1() {
+    return requirePackage("ppclig:v1");
+}
+function CligV2() {
+    return requirePackage("clig:v2");
+}
+var provideApi = provide;
+var requireApi = requirePackage;
 
 exports.whoamiV1 = whoamiV1;
+exports.utilsV1 = utilsV1;
+exports.CligV1 = CligV1;
+exports.CligV2 = CligV2;
+exports.provideApi = provideApi;
+exports.requireApi = requireApi;
