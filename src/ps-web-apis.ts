@@ -112,6 +112,12 @@ export interface WhoamiV1 {
      * will provide unsafe purchase data
      */
     getUnsafePurchaseData(): Promise<PurchaseData>;
+
+    /**
+     * will provide jaId for logged in users, otherwise
+     * @throws error
+     */
+    getJaId(): string;
 }
 
 export interface UtilsV1 {
