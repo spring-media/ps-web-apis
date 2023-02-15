@@ -4,7 +4,6 @@ export interface WhoamiUserInfo {
     user_id: string;
     first_name?: string;
     last_name?: string;
-    email: string;
 }
 export interface PurchaseData {
     entitlements: [string];
