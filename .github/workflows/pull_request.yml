@@ -48,11 +48,11 @@ jobs:
     steps:
       - name: Checkout branch
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1.2.0
 
       - name: Checkout master
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1.2.0
         with:
           ref: master
 
