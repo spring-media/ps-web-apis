@@ -6,10 +6,10 @@
   "module": "dist/ps-web-apis.esm.js",
   "types": "dist/ps-web-apis.d.ts",
   "scripts": {
-    "all": "npm run format && npm run lint && npm run build && npm run test",
+    "all": "yarn format && yarn lint && yarn build && yarn test",
     "build": "rollup -c",
     "test": "jest --coverage",
-    "check": "npm run format-check && npm run lint-check",
+    "check": "yarn format-check && yarn run lint-check",
     "format": "prettier --print-width 140 --tab-width 4 --write '{src,test}/**/*.{ts,tsx}'",
     "format-check": "prettier --print-width 140 --tab-width 4 --list-different 'src/**/*.{ts,tsx}'",
     "lint": "tslint --fix './src/**/*.{ts,tsx}'",

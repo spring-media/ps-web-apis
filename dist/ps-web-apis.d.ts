@@ -73,7 +73,8 @@ export interface WhoamiV1 {
      */
     getUnsafePurchaseData(): Promise<PurchaseData>;
     /**
-     * will provide jaId
+     * will provide jaId for logged in users, otherwise
+     * @throws error
      */
     getJaId(): string;
 }
@@ -81,7 +82,7 @@ export interface UtilsV1 {
     fetchWithTimeout: Fetch;
 }
 export declare type ILayer = "privacy" | "reject";
-export declare type IApp = "offerpage" | "checkout";
+export declare type IApp = "offerpage" | "checkout" | "cancellation";
 export declare type ITenant = "welt" | "bild";
 export interface IAccount {
     accountId: number | string;

@@ -123,7 +123,7 @@ export interface UtilsV1 {
     fetchWithTimeout: Fetch;
 }
 export type ILayer = "privacy" | "reject";
-export type IApp = "offerpage" | "checkout";
+export type IApp = "offerpage" | "checkout" | "cancellation";
 export type ITenant = "welt" | "bild";
 
 export interface IAccount {
