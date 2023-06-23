@@ -4,61 +4,68 @@ on:
     branches:
       - master
 
+env:
+  GITHUB_TOKEN: ${{ secrets.PS_GITHUB_ACCESSTOKEN }}
+
 jobs:
   checks:
     name: Formatting checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v1.2.0
+        uses: actions/checkout@v2
 
       - name: Set Node.js 16
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: "16"
+          cache: 'yarn'
 
-      - name: Install npm
-        run: npm ci
+      - name: Configure npm
+        run: |
+          npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
 
-      - name: Npm format-check
-        run: npm run check --if-present
+      - name: Install yarn
+        run: yarn install --frozen-lockfile
+
+      - name: yarn format-check
+        run: yarn check --if-present
 
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v1.2.0
+        uses: actions/checkout@v2
 
       - name: Set Node.js 16
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: "16"
+          cache: 'yarn'
 
       - name: config npm
         run: |
           npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
-        env:
-          GITHUB_TOKEN: ${{ secrets.PS_GITHUB_ACCESSTOKEN }}
 
-      - name: Install npm
-        run: npm ci
+      - name: Install yarn
+        run: yarn install --frozen-lockfile
 
-      - name: Test npm
-        run: npm run test
+      - name: Test yarn
+        run: yarn test
 
       - name: Patch version
         run: |
           git config --global user.name "Spring Media CD"
           git config --global user.email "ps-support-og@moveoffice.com"
           git remote add publisher "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          npm version patch -m "Automatically updated npm version to %s"
+          yarn version --patch
           git push publisher HEAD:master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build npm
-        run: npm run build
+      - name: Build yarn
+        run: yarn build
 
       - name: Publish package
         run: npm publish

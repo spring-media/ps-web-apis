@@ -4,7 +4,7 @@ ps-web-apis is a client side library to interface with ps services on ps support
 
 # Installation
 
-`npm install --save @spring-media/ps-web-apis`
+`yarn install @spring-media/ps-web-apis`
 
 > **Note** Also needs [ps-rosetta](https://github.com/spring-media/ps-rosetta) to be present on the website:
 
@@ -31,6 +31,6 @@ whoamiV1()
 # Building
 
 ```
-npm i
-npm run build
+yarn
+yarn build
 ```
