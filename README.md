@@ -2,6 +2,12 @@
 
 ps-web-apis is a client side library to interface with ps services on ps supported websites.
 
+The possible use cases are documented here: 
+https://github.com/spring-media/ps-public-integration
+
+Please use public-integration to implement your use case. If it is not listed there or the documentation is not understandable / complete, please contact the team premium services for assistance. 
+
+
 # Installation
 
 `yarn install @spring-media/ps-web-apis`
@@ -12,7 +18,7 @@ ps-web-apis is a client side library to interface with ps services on ps support
 <script type="text/javascript" src="https://rosetta.prod.ps.(welt|bild).de/ps-rosetta.js"></script>
 ```
 
-# Usage
+# Basic Usage
 
 ```javascript
 import { whoamiV1 } from "@spring-media/ps-web-apis";
