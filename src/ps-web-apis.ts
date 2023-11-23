@@ -53,7 +53,7 @@ export type FetchOptions = RequestInit & { timeout?: number };
  * Custom fetch interface which includes the possibility to customize timeouts for fetch requests
  */
 export type Fetch = (input: RequestInfo, init?: FetchOptions) => Promise<Response>;
-
+export type GetRosettaEnvByKey = (key: string) => string;
 export interface WhoamiV1 {
     /**
      * will assert valid not outdated session before fetch will be done. backend credentials will be added automatically
@@ -127,6 +127,7 @@ export interface WhoamiV1 {
 
 export interface UtilsV1 {
     fetchWithTimeout: Fetch;
+    getRosettaEnvByKey: GetRosettaEnvByKey;
 }
 export type ILayer = "privacy" | "reject";
 export type IApp = "offerpage" | "checkout" | "cancellation";
