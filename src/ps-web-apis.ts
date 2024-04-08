@@ -117,6 +117,11 @@ export interface WhoamiV1 {
      * will provide unsafe purchase data
      */
     getUnsafePurchaseData(): Promise<PurchaseData>;
+    /**
+     * will provide users registration date if available otherwise returns null.
+     * Registration date in unix timestamp.
+     */
+    getUnsafeRegistrationDate(): Promise<null | number>;
 
     /**
      * will provide jaId for logged in users, otherwise
