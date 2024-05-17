@@ -48,12 +48,15 @@ export interface PurchaseData {
     entitlements: [string];
 }
 export type FetchOptions = RequestInit & { timeout?: number };
+export type WaitingRoomQueue = "auth" | "checkout";
 
 /**
  * Custom fetch interface which includes the possibility to customize timeouts for fetch requests
  */
 export type Fetch = (input: RequestInfo, init?: FetchOptions) => Promise<Response>;
 export type GetRosettaEnvByKey = (key: string) => string | undefined;
+export type WaitForCapacity = (queue: WaitingRoomQueue) => Promise<void>;
+
 export interface WhoamiV1 {
     /**
      * will assert valid not outdated session before fetch will be done. backend credentials will be added automatically
@@ -134,6 +137,11 @@ export interface UtilsV1 {
     fetchWithTimeout: Fetch;
     getRosettaEnvByKey: GetRosettaEnvByKey;
 }
+
+export interface WaitingRoomV1 {
+    waitForCapacity: WaitForCapacity;
+}
+
 export type ILayer = "privacy" | "reject";
 export type IApp = "offerpage" | "checkout" | "cancellation";
 export type ITenant = "welt" | "bild";
@@ -170,11 +178,17 @@ export function utilsV1(): Promise<UtilsV1> {
     return requirePackage("utils:v1");
 }
 
+export function waitingRoomV1(): Promise<WaitingRoomV1> {
+    return requireApi("waiting_room:v1");
+}
+
 export function CligV1(): Promise<ICligV1> {
     return requirePackage("ppclig:v1");
 }
+
 export function CligV2(): Promise<ICligV2> {
     return requirePackage("clig:v2");
 }
+
 export const provideApi = provide;
 export const requireApi = requirePackage;
