@@ -60,6 +60,7 @@ export type Fetch = (
 ) => Promise<Response>;
 export type GetRosettaEnvByKey = (key: string) => string | undefined;
 export type WaitForCapacity = (queue: WaitingRoomQueue) => Promise<void>;
+export type RegisterIframeMessageListener = (eventtype: string, listener: (event: any, iframe: HTMLIFrameElement) => void) => void;
 
 export interface WhoamiV1 {
   /**
@@ -140,8 +141,8 @@ export interface WhoamiV1 {
 export interface UtilsV1 {
   fetchWithTimeout: Fetch;
   getRosettaEnvByKey: GetRosettaEnvByKey;
+  registerIframeMessageListener: RegisterIframeMessageListener;
 }
-
 export interface WaitingRoomV1 {
   waitForCapacity: WaitForCapacity;
 }
