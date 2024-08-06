@@ -45,8 +45,7 @@ export interface WhoamiUserInfo {
 }
 
 export interface PurchaseData {
-  entitlements
-  : [string];
+  entitlements: [string];
 }
 
 export interface UserDataRequestResult {
