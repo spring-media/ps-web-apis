@@ -174,6 +174,11 @@ export interface UtilsV1 {
   getRosettaEnvByKey: GetRosettaEnvByKey;
   registerIframeMessageListener: RegisterIframeMessageListener;
 }
+
+export interface AbV1 {
+  userInTestGroupForFeature: (key: string) => { canSeeFeature: boolean, testGroup: string };
+}
+
 export interface WaitingRoomV1 {
   waitForCapacity: WaitForCapacity;
 }
@@ -216,6 +221,10 @@ export function utilsV1(): Promise<UtilsV1> {
 
 export function waitingRoomV1(): Promise<WaitingRoomV1> {
   return requireApi("waiting_room:v1");
+}
+
+export function abV1(): Promise<AbV1> {
+  return requirePackage("ab:v1");
 }
 
 export function CligV1(): Promise<ICligV1> {
