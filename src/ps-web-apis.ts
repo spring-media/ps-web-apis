@@ -176,7 +176,7 @@ export interface UtilsV1 {
 }
 
 export interface AbV1 {
-  userInTestGroupForFeature: (key: string) => { canSeeFeature: boolean, testGroup: string };
+  userInTestGroupForFeature: (key: string) => { canSeeFeature: boolean, testGroup: "A" | "B" };
 }
 
 export interface WaitingRoomV1 {
