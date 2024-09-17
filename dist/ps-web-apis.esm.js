@@ -74,6 +74,12 @@ function whoamiV1() {
 function utilsV1() {
     return requirePackage("utils:v1");
 }
+function waitingRoomV1() {
+    return requireApi("waiting_room:v1");
+}
+function abV1() {
+    return requirePackage("ab:v1");
+}
 function CligV1() {
     return requirePackage("ppclig:v1");
 }
@@ -83,4 +89,4 @@ function CligV2() {
 var provideApi = provide;
 var requireApi = requirePackage;
 
-export { CligV1, CligV2, provideApi, requireApi, utilsV1, whoamiV1 };
+export { whoamiV1, utilsV1, waitingRoomV1, abV1, CligV1, CligV2, provideApi, requireApi };
