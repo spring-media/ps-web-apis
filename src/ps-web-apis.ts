@@ -174,7 +174,30 @@ export interface WhoamiV1 {
      * @throws error
      */
     getJaId(): string;
+
+    /**
+     * will render the Wonderwall in the given container with the given props and call the callback after main functionality is done
+     *
+     * @param container - The HTML element in which the Wonderwall should be rendered.
+     * The container should be an HTML element.
+     *
+     * @param props - The props that should be passed, which will be used to render the Wonderwall.
+     * The props should contain the template and variant.
+     * The props can optional contain the headline and ctaText.
+     *
+     * @param callback - The callback that should be called after the main functionality is done.
+     * The callback should be a function
+     *
+     */
+    renderWonderwall(container: HTMLElement, props: WonderwallProps, callback?: () => void): void;
 }
+
+export type WonderwallProps = {
+    template: string;
+    variant: string;
+    headline?: string;
+    ctaText?: string;
+};
 
 export interface UtilsV1 {
     fetchWithTimeout: Fetch;
