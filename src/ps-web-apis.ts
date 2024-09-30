@@ -185,15 +185,12 @@ export interface WhoamiV1 {
      * The props should contain the template and variant.
      * The props can optional contain the headline and ctaText.
      *
-     * @param callback - The callback that should be called after the main functionality is done.
-     * The callback should be a function
-     *
      */
-    renderAuthComponent(container: HTMLElement, props: WonderwallProps, callback: () => void): void;
+    renderAuthComponent(container: HTMLElement, props: WonderwallProps): void;
 }
 
 export type WonderwallProps = {
-    template: "login" | "register" | "verification" | "recovery";
+    template: "login" | "register";
     variant: string;
     headline?: string;
     ctaText?: string;
