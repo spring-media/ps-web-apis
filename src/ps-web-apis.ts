@@ -189,11 +189,11 @@ export interface WhoamiV1 {
      * The callback should be a function
      *
      */
-    renderWonderwall(container: HTMLElement, props: WonderwallProps, callback?: () => void): void;
+    renderAuthComponent(container: HTMLElement, props: WonderwallProps, callback: () => void): void;
 }
 
 export type WonderwallProps = {
-    template: string;
+    template: "login" | "register" | "verification" | "recovery";
     variant: string;
     headline?: string;
     ctaText?: string;
