@@ -174,7 +174,33 @@ export interface WhoamiV1 {
      * @throws error
      */
     getJaId(): string;
+
+    /**
+     * will render the Wonderwall in the given container with the given props and call the callback after main functionality is done
+     *
+     * @param container - The HTML element in which the Wonderwall should be rendered.
+     * The container should be an HTML element.
+     *
+     * @param props - The props that should be passed, which will be used to render the Wonderwall.
+     * The props should contain the template and variant.
+     * The props can optional contain the headline and ctaText.
+     *
+     * @param abortable - If true, the Wonderwall can be aborted by the user.
+     */
+    renderAuthComponent(container: HTMLElement, props: WonderwallProps, abortable: boolean): Promise<AuthRes>;
 }
+
+export interface AuthRes {
+    isLoggedIn: boolean;
+    message: string;
+}
+
+export type WonderwallProps = {
+    template: "login" | "register";
+    variant: string;
+    headline?: string;
+    ctaText?: string;
+};
 
 export interface UtilsV1 {
     fetchWithTimeout: Fetch;
