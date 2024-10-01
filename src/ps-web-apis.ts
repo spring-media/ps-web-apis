@@ -185,8 +185,14 @@ export interface WhoamiV1 {
      * The props should contain the template and variant.
      * The props can optional contain the headline and ctaText.
      *
+     * @param abortable - If true, the Wonderwall can be aborted by the user.
      */
-    renderAuthComponent(container: HTMLElement, props: WonderwallProps): void;
+    renderAuthComponent(container: HTMLElement, props: WonderwallProps, abortable: boolean): Promise<AuthRes>;
+}
+
+export interface AuthRes {
+    isLoggedIn: boolean;
+    message: string;
 }
 
 export type WonderwallProps = {
