@@ -181,13 +181,17 @@ export interface WhoamiV1 {
      * @param container - The HTML element in which the Wonderwall should be rendered.
      * The container should be an HTML element.
      *
-     * @param props - The props that should be passed, which will be used to render the Wonderwall.
-     * The props should contain the template and variant.
-     * The props can optional contain the headline and ctaText.
+     * @param {Object} props - The props that should be passed, which will be passed to the auth component.
+     * @param {String} props.template - valid choices are "register" and "login"
+     * @param {String} props.variant - variant of the brand that should be shown e.g bild or welt
+     * @param {boolean} [props.abortable] - user can leave auth screen if true (not yet implemented)
+     * @param {String} [props.loginHeadline]
+     * @param {String} [props.registerHeadline]
+     * @param {String} [props.loginCta]
+     * @param {String} [props.registerCta]
      *
-     * @param abortable - If true, the Wonderwall can be aborted by the user.
      */
-    renderAuthComponent(container: HTMLElement, props: WonderwallProps, abortable: boolean): Promise<AuthRes>;
+    renderAuthComponent(container: HTMLElement, props: WonderwallProps): Promise<AuthRes>;
 }
 
 export interface AuthRes {
@@ -195,11 +199,28 @@ export interface AuthRes {
     message: string;
 }
 
+export type WonderwallVariant =
+    | "welt"
+    | "bild"
+    | "bild-tv"
+    | "sportbild"
+    | "bild-markenshop"
+    | "osp"
+    | "computerbild-vip-lounge"
+    | "autobild"
+    | "autobild-vip-lounge"
+    | "sportbild-fanmeile"
+    | "lidlbild"
+    | "bz";
+
 export type WonderwallProps = {
     template: "login" | "register";
-    variant: string;
-    headline?: string;
-    ctaText?: string;
+    variant: WonderwallVariant;
+    abortable?: boolean;
+    loginHeadline: string;
+    registerHeadline: string;
+    loginCta?: string;
+    registerCta?: string;
 };
 
 export interface UtilsV1 {
