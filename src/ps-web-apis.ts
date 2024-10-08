@@ -217,8 +217,8 @@ export type WonderwallProps = {
     template: "login" | "register";
     variant: WonderwallVariant;
     abortable?: boolean;
-    loginHeadline: string;
-    registerHeadline: string;
+    loginHeadline?: string;
+    registerHeadline?: string;
     loginCta?: string;
     registerCta?: string;
 };
