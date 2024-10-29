@@ -16,7 +16,7 @@ export declare type FetchOptions = RequestInit & {
     timeout?: number;
 };
 export declare type WaitingRoomQueueDefault = "";
-export declare type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout";
+export declare type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout" | "lefty-in-app-purchase";
 /**
  * Custom fetch interface which includes the possibility to customize timeouts for fetch requests
  */
@@ -130,7 +130,38 @@ export interface WhoamiV1 {
      * @throws error
      */
     getJaId(): string;
+    /**
+     * will render the Wonderwall in the given container with the given props and call the callback after main functionality is done
+     *
+     * @param container - The HTML element in which the Wonderwall should be rendered.
+     * The container should be an HTML element.
+     *
+     * @param {Object} props - The props that should be passed, which will be passed to the auth component.
+     * @param {String} props.template - valid choices are "register" and "login"
+     * @param {String} props.variant - variant of the brand that should be shown e.g bild or welt
+     * @param {boolean} [props.abortable] - user can leave auth screen if true (not yet implemented)
+     * @param {String} [props.loginHeadline]
+     * @param {String} [props.registerHeadline]
+     * @param {String} [props.loginCta]
+     * @param {String} [props.registerCta]
+     *
+     */
+    renderAuthComponent(container: HTMLElement, props: WonderwallProps): Promise<AuthRes>;
 }
+export interface AuthRes {
+    isLoggedIn: boolean;
+    message: string;
+}
+export declare type WonderwallVariant = "welt" | "bild" | "bild-tv" | "sportbild" | "bild-markenshop" | "osp" | "computerbild-vip-lounge" | "autobild" | "autobild-vip-lounge" | "sportbild-fanmeile" | "lidlbild" | "bz";
+export declare type WonderwallProps = {
+    template: "login" | "register";
+    variant: WonderwallVariant;
+    abortable?: boolean;
+    loginHeadline?: string;
+    registerHeadline?: string;
+    loginCta?: string;
+    registerCta?: string;
+};
 export interface UtilsV1 {
     fetchWithTimeout: Fetch;
     getRosettaEnvByKey: GetRosettaEnvByKey;

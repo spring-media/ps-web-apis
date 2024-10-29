@@ -93,11 +93,11 @@ function CligV2() {
 var provideApi = provide;
 var requireApi = requirePackage;
 
-exports.whoamiV1 = whoamiV1;
-exports.utilsV1 = utilsV1;
-exports.waitingRoomV1 = waitingRoomV1;
-exports.abV1 = abV1;
 exports.CligV1 = CligV1;
 exports.CligV2 = CligV2;
+exports.abV1 = abV1;
 exports.provideApi = provideApi;
 exports.requireApi = requireApi;
+exports.utilsV1 = utilsV1;
+exports.waitingRoomV1 = waitingRoomV1;
+exports.whoamiV1 = whoamiV1;
