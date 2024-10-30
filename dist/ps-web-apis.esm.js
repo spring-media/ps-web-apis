@@ -89,4 +89,4 @@ function CligV2() {
 var provideApi = provide;
 var requireApi = requirePackage;
 
-export { whoamiV1, utilsV1, waitingRoomV1, abV1, CligV1, CligV2, provideApi, requireApi };
+export { CligV1, CligV2, abV1, provideApi, requireApi, utilsV1, waitingRoomV1, whoamiV1 };

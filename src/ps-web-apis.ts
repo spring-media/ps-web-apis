@@ -55,7 +55,7 @@ export interface UserDataRequestResult {
 
 export type FetchOptions = RequestInit & { timeout?: number };
 export type WaitingRoomQueueDefault = "";
-export type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout";
+export type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout" | "lefty-in-app-purchase";
 
 /**
  * Custom fetch interface which includes the possibility to customize timeouts for fetch requests
