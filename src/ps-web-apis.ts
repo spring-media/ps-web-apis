@@ -53,7 +53,7 @@ export interface UserDataRequestResult {
     reason?: "userNotLoggedIn" | "generalError" | "userAborted";
 }
 
-export type FetchOptions = RequestInit & { timeout?: number };
+export type FetchOptions = RequestInit & { timeout?: number, retries?: number, delay?: number };
 export type WaitingRoomQueueDefault = "";
 export type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout" | "lefty-in-app-purchase";
 
