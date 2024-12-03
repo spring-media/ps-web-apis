@@ -57,6 +57,7 @@ export type FetchOptions = RequestInit & {
     timeout?: number;
     retries?: number;
     retryDelay?: number;
+    retryStatusCodes?: number[];
 };
 export type WaitingRoomQueueDefault = "";
 export type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout" | "lefty-in-app-purchase";
