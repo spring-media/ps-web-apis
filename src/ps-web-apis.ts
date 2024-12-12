@@ -48,6 +48,23 @@ export interface PurchaseData {
     entitlements: [string];
 }
 
+export interface ServicePassportSuccessResponse {
+    code: string;       
+    message: string;    
+    passport: string;  
+    expires: number; 
+}
+
+export interface ServicePassportErrorResponse {
+    code: string;       
+    message: string;    
+}
+
+export type ServicePassportResponse = 
+    | ServicePassportSuccessResponse 
+    | ServicePassportErrorResponse;
+
+
 export interface UserDataRequestResult {
     success: boolean;
     reason?: "userNotLoggedIn" | "generalError" | "userAborted";
@@ -197,6 +214,18 @@ export interface WhoamiV1 {
      *
      */
     renderAuthComponent(container: HTMLElement, props: WonderwallProps): Promise<AuthRes>;
+
+    /**
+     * Retrieves a service passport for the specified service.
+     * The passport is intended to be used for authenticated communication with the service.
+     *
+     * @param service - The identifier or type of the service for which the passport is requested. 
+     *                  Use "logora" or a custom service identifier as a string.
+     *
+     * @returns A promise that resolves to a ServicePassportResponse containing the token and related details.
+     */
+    getServicePassport(service: "logora" | string): Promise<ServicePassportResponse>;
+
 }
 
 export interface AuthRes {
