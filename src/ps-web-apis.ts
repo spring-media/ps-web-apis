@@ -77,7 +77,7 @@ export type FetchOptions = RequestInit & {
     retryStatusCodes?: number[];
 };
 export type WaitingRoomQueueDefault = "";
-export type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout" | "lefty-in-app-purchase";
+export type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout" | "lefty-in-app-purchase" | "logora";
 
 /**
  * Custom fetch interface which includes the possibility to customize timeouts for fetch requests
