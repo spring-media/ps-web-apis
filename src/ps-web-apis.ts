@@ -49,21 +49,18 @@ export interface PurchaseData {
 }
 
 export interface ServicePassportSuccessResponse {
-    code: string;       
-    message: string;    
-    passport: string;  
-    expires: number; 
+    code: string;
+    message: string;
+    passport: string;
+    expires: number;
 }
 
 export interface ServicePassportErrorResponse {
-    code: string;       
-    message: string;    
+    code: string;
+    message: string;
 }
 
-export type ServicePassportResponse = 
-    | ServicePassportSuccessResponse 
-    | ServicePassportErrorResponse;
-
+export type ServicePassportResponse = ServicePassportSuccessResponse | ServicePassportErrorResponse;
 
 export interface UserDataRequestResult {
     success: boolean;
@@ -200,32 +197,30 @@ export interface WhoamiV1 {
     /**
      * will render the Wonderwall in the given container with the given props and call the callback after main functionality is done
      *
-     * @param container - The HTML element in which the Wonderwall should be rendered.
-     * The container should be an HTML element.
-     *
-     * @param {Object} props - The props that should be passed, which will be passed to the auth component.
-     * @param {String} props.template - valid choices are "register" and "login"
-     * @param {String} props.variant - variant of the brand that should be shown e.g bild or welt
-     * @param {boolean} [props.abortable] - user can leave auth screen if true (not yet implemented)
-     * @param {String} [props.loginHeadline]
-     * @param {String} [props.registerHeadline]
-     * @param {String} [props.loginCta]
-     * @param {String} [props.registerCta]
+     * @param {Object} config - config container object
+     * @param {HTMLElement} [config.container] - The HTML element in which the Wonderwall should be rendered in. default = overlay
+     * @param {Object} config.props - The props which will be passed to the Wonderwall web component.
+     * @param {String} config.props.template - valid choices are "register" and "login"
+     * @param {String} config.props.variant - variant of the brand that should be shown e.g bild or welt
+     * @param {boolean} [config.props.abortable] - user can leave auth screen if true (not yet implemented)
+     * @param {String} [config.props.loginHeadline]
+     * @param {String} [config.props.registerHeadline]
+     * @param {String} [config.props.loginCta]
+     * @param {String} [config.props.registerCta]
      *
      */
-    renderAuthComponent(container: HTMLElement, props: WonderwallProps): Promise<AuthRes>;
+    renderAuthComponent(config: AuthComponentConfig): Promise<AuthRes>;
 
     /**
      * Retrieves a service passport for the specified service.
      * The passport is intended to be used for authenticated communication with the service.
      *
-     * @param service - The identifier or type of the service for which the passport is requested. 
+     * @param service - The identifier or type of the service for which the passport is requested.
      *                  Use "logora" or a custom service identifier as a string.
      *
      * @returns A promise that resolves to a ServicePassportResponse containing the token and related details.
      */
     getServicePassport(service: "logora" | string): Promise<ServicePassportResponse>;
-
 }
 
 export interface AuthRes {
@@ -256,6 +251,11 @@ export type WonderwallProps = {
     loginCta?: string;
     registerCta?: string;
 };
+
+export interface AuthComponentConfig {
+    container?: HTMLElement;
+    props: WonderwallProps;
+}
 
 export interface UtilsV1 {
     fetchWithTimeout: Fetch;
