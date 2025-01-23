@@ -260,6 +260,7 @@ export interface AuthComponentConfig {
 export interface UtilsV1 {
     fetchWithTimeout: Fetch;
     getRosettaEnvByKey: GetRosettaEnvByKey;
+    getOverwritableRosettaEnvByKey: GetRosettaEnvByKey;
     registerIframeMessageListener: RegisterIframeMessageListener;
 }
 
