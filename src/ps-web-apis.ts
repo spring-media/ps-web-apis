@@ -82,6 +82,7 @@ export type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout" | "
 export type Fetch = (input: RequestInfo, init?: FetchOptions) => Promise<Response>;
 export type GetRosettaEnvByKey = (key: string) => string | undefined;
 export type WaitForCapacity = (queue: WaitingRoomQueue) => Promise<void>;
+export type GetUserCredit = () => Promise<number>;
 export type RegisterIframeMessageListener = (eventtype: string, listener: (event: any, iframe: HTMLIFrameElement) => void) => void;
 
 export interface WhoamiV1 {
@@ -270,6 +271,10 @@ export interface AbV1 {
 
 export interface WaitingRoomV1 {
     waitForCapacity: WaitForCapacity;
+}
+
+export interface WalletV1 {
+    getUserCredit: GetUserCredit;
 }
 
 export type ILayer = "privacy" | "reject";
