@@ -321,6 +321,10 @@ export function abV1(): Promise<AbV1> {
     return requirePackage("ab:v1");
 }
 
+export function walletV1(): Promise<WalletV1> {
+    return requirePackage("wallet:v1");
+}
+
 export function CligV1(): Promise<ICligV1> {
     return requirePackage("ppclig:v1");
 }
