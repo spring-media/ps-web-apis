@@ -21,11 +21,11 @@ jobs:
     steps:
       - name: Checkout branch
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set Node.js 16
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "16"
           cache: 'yarn'
@@ -48,11 +48,11 @@ jobs:
     steps:
       - name: Checkout branch
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/checkout@v1.2.0
+        uses: actions/checkout@v4
 
       - name: Checkout master
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/checkout@v1.2.0
+        uses: actions/checkout@v4
         with:
           ref: master
 
@@ -65,7 +65,7 @@ jobs:
 
       - name: Set Node.js 16
         if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "16"
           cache: 'yarn'
