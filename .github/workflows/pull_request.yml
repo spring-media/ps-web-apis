@@ -1,15 +1,6 @@
 name: Checks
 on:
   pull_request:
-  # we're doing the filtering for branches and actions in each step,
-  # this one here works not as expected and could be misleading
-#    branches:
-#      - migrating-to-yaml-syntax
-#      - master
-#    action:
-#      - opened
-#      - edited
-#      - synchronize
 
 env:
   GITHUB_TOKEN: ${{ secrets.PS_GITHUB_ACCESSTOKEN }}
@@ -20,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/checkout@v4
 
       - name: Set Node.js 16
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/setup-node@v4
         with:
           node-version: "16"
@@ -35,11 +24,9 @@ jobs:
           npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
 
       - name: Install yarn
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         run: yarn install --frozen-lockfile
 
       - name: yarn format-check
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         run: yarn check
 
   build:
@@ -47,24 +34,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/checkout@v4
-
-      - name: Checkout master
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        uses: actions/checkout@v4
-        with:
-          ref: master
-
-      - name: Check merge
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
-        run: |
-          git config --global user.name "Spring Media CD"
-          git config --global user.email "ps-support-og@moveoffice.com"
-          git merge ${{ github.event.pull_request.head.sha }} -m"prchecker" --stat
 
       - name: Set Node.js 16
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         uses: actions/setup-node@v4
         with:
           node-version: "16"
@@ -75,13 +47,10 @@ jobs:
           npm config set //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
 
       - name: Install yarn
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         run: yarn install --frozen-lockfile
 
       - name: Test yarn
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         run: yarn test
 
       - name: Build yarn
-        if: github.event.action == 'opened' || github.event.action == 'edited' || github.event.action == 'synchronize'
         run: yarn build
