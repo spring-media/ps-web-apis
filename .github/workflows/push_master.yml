@@ -74,10 +74,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PS_GITHUB_ACCESSTOKEN }}
 
-      - name: config axel github npm
-        run: |
-            npm config set //npm.pkg.github.com/:_authToken=$GITHUB_AXEL_NPM_TOKEN
-
       - name: Publish package to axelspringer
         run: |
           sed -i 's/@spring-media/@axelspringer/' package.json 
