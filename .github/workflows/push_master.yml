@@ -6,6 +6,8 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.PS_GITHUB_ACCESSTOKEN }}
+  GITHUB_AXEL_NPM_TOKEN: ${{ secrets.PS_GITHUB_AXELSPRINGER_PACKAGEPUBLISH }}
+
 
 jobs:
   checks:
@@ -67,7 +69,16 @@ jobs:
       - name: Build yarn
         run: yarn build
 
-      - name: Publish package
+      - name: Publish package internal
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PS_GITHUB_ACCESSTOKEN }}
+
+      - name: config axel github npm
+        run: |
+            npm config set //npm.pkg.github.com/:_authToken=$GITHUB_AXEL_NPM_TOKEN
+
+      - name: Publish package to public
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PS_GITHUB_AXELSPRINGER_PACKAGEPUBLISH }}
