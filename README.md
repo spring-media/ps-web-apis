@@ -1,4 +1,4 @@
-# ps-web-apis 
+# ps-web-apis
 
 ps-web-apis is a client side library to interface with ps services on ps supported websites.
 
