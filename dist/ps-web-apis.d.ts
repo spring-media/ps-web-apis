@@ -6,7 +6,7 @@ export interface WhoamiUserInfo {
     last_name?: string;
 }
 export interface PurchaseData {
-    entitlements: [string];
+    entitlements: string[];
 }
 export interface ServicePassportSuccessResponse {
     code: string;
@@ -30,13 +30,14 @@ export declare type FetchOptions = RequestInit & {
     retryStatusCodes?: number[];
 };
 export declare type WaitingRoomQueueDefault = "";
-export declare type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout" | "lefty-in-app-purchase";
+export declare type WaitingRoomQueue = WaitingRoomQueueDefault | "auth" | "checkout" | "lefty-in-app-purchase" | "logora";
 /**
  * Custom fetch interface which includes the possibility to customize timeouts for fetch requests
  */
 export declare type Fetch = (input: RequestInfo, init?: FetchOptions) => Promise<Response>;
 export declare type GetRosettaEnvByKey = (key: string) => string | undefined;
 export declare type WaitForCapacity = (queue: WaitingRoomQueue) => Promise<void>;
+export declare type GetUserCreditBalance = () => Promise<number>;
 export declare type RegisterIframeMessageListener = (eventtype: string, listener: (event: any, iframe: HTMLIFrameElement) => void) => void;
 export interface WhoamiV1 {
     /**
@@ -147,20 +148,20 @@ export interface WhoamiV1 {
     /**
      * will render the Wonderwall in the given container with the given props and call the callback after main functionality is done
      *
-     * @param container - The HTML element in which the Wonderwall should be rendered.
-     * The container should be an HTML element.
-     *
-     * @param {Object} props - The props that should be passed, which will be passed to the auth component.
-     * @param {String} props.template - valid choices are "register" and "login"
-     * @param {String} props.variant - variant of the brand that should be shown e.g bild or welt
-     * @param {boolean} [props.abortable] - user can leave auth screen if true (not yet implemented)
-     * @param {String} [props.loginHeadline]
-     * @param {String} [props.registerHeadline]
-     * @param {String} [props.loginCta]
-     * @param {String} [props.registerCta]
+     * @param {Object} config - config container object
+     * @param {HTMLElement} [config.container] - The HTML element in which the Wonderwall should be rendered in. default = overlay
+     * @param {boolean} [config.inlineRender] - Renders Wonderwall directly in container instead of as overlay. default = false
+     * @param {Object} config.props - The props which will be passed to the Wonderwall web component.
+     * @param {String} config.props.template - valid choices are "register" and "login"
+     * @param {String} config.props.variant - variant of the brand that should be shown e.g bild or welt
+     * @param {boolean} [config.props.abortable] - user can leave auth screen if true (not yet implemented)
+     * @param {String} [config.props.loginHeadline]
+     * @param {String} [config.props.registerHeadline]
+     * @param {String} [config.props.loginCta]
+     * @param {String} [config.props.registerCta]
      *
      */
-    renderAuthComponent(container: HTMLElement, props: WonderwallProps): Promise<AuthRes>;
+    renderAuthComponent(config: AuthComponentConfig): Promise<AuthRes>;
     /**
      * Retrieves a service passport for the specified service.
      * The passport is intended to be used for authenticated communication with the service.
@@ -186,9 +187,15 @@ export declare type WonderwallProps = {
     loginCta?: string;
     registerCta?: string;
 };
+export interface AuthComponentConfig {
+    container?: HTMLElement;
+    inlineRender?: boolean;
+    props: WonderwallProps;
+}
 export interface UtilsV1 {
     fetchWithTimeout: Fetch;
     getRosettaEnvByKey: GetRosettaEnvByKey;
+    getOverwritableRosettaEnvByKey: GetRosettaEnvByKey;
     registerIframeMessageListener: RegisterIframeMessageListener;
 }
 export interface AbV1 {
@@ -199,6 +206,9 @@ export interface AbV1 {
 }
 export interface WaitingRoomV1 {
     waitForCapacity: WaitForCapacity;
+}
+export interface WalletV1 {
+    getUserCreditBalance: GetUserCreditBalance;
 }
 export declare type ILayer = "privacy" | "reject";
 export declare type IApp = "offerpage" | "checkout" | "cancellation";
@@ -231,6 +241,7 @@ export declare function whoamiV1(): Promise<WhoamiV1>;
 export declare function utilsV1(): Promise<UtilsV1>;
 export declare function waitingRoomV1(): Promise<WaitingRoomV1>;
 export declare function abV1(): Promise<AbV1>;
+export declare function walletV1(): Promise<WalletV1>;
 export declare function CligV1(): Promise<ICligV1>;
 export declare function CligV2(): Promise<ICligV2>;
 export declare const provideApi: typeof provide;
