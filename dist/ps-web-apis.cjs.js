@@ -84,6 +84,9 @@ function waitingRoomV1() {
 function abV1() {
     return requirePackage("ab:v1");
 }
+function walletV1() {
+    return requirePackage("wallet:v1");
+}
 function CligV1() {
     return requirePackage("ppclig:v1");
 }
@@ -100,4 +103,5 @@ exports.provideApi = provideApi;
 exports.requireApi = requireApi;
 exports.utilsV1 = utilsV1;
 exports.waitingRoomV1 = waitingRoomV1;
+exports.walletV1 = walletV1;
 exports.whoamiV1 = whoamiV1;

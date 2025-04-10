@@ -10,18 +10,18 @@ Please use public-integration to implement your use case. If it is not listed th
 
 # Installation
 
-`yarn install @spring-media/ps-web-apis`
+`yarn install @axelspringer/ps-web-apis`
 
 > **Note** Also needs [ps-rosetta](https://github.com/spring-media/ps-rosetta) to be present on the website:
 
 ```html
-<script type="text/javascript" src="https://rosetta.prod.ps.(welt|bild).de/ps-rosetta.js"></script>
+<script type="text/javascript" src="https://rosetta.prod.ps.(welt|bild|axelspringer).de/ps-rosetta.js"></script>
 ```
 
 # Basic Usage
 
 ```javascript
-import { whoamiV1 } from "@spring-media/ps-web-apis";
+import { whoamiV1 } from "@axelspringer/ps-web-apis";
 
 whoamiV1()
   .then((whoami) => {
