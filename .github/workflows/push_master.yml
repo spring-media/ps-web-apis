@@ -81,6 +81,6 @@ jobs:
       - name: Publish package to axelspringer
         run: |
           sed -i 's/@spring-media/@axelspringer/' package.json 
-          npm publish
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PS_GITHUB_AXELSPRINGER_PACKAGEPUBLISH }}
