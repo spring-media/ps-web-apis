@@ -205,7 +205,7 @@ export interface WhoamiV1 {
      * @param {String} config.props.template - valid choices are "register" and "login"
      * @param {String} config.props.variant - variant of the brand that should be shown e.g bild or welt
      * @param {boolean} [config.props.abortable] - user can leave auth screen if true (not yet implemented)
-     * @param {boolean} [config.props.reloadOnNewAuth] - reload page if true after a new login or registration / no reload on already logged in user
+     * @param {boolean} [config.props.reloadOnNewAuth] - reload page if true after a new login or registration / no reload on already logged in user, default = false   
      * @param {String} [config.props.loginHeadline]
      * @param {String} [config.props.registerHeadline]
      * @param {String} [config.props.loginCta]
