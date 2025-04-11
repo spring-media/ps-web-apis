@@ -201,11 +201,12 @@ export interface WhoamiV1 {
      * @param {Object} config - config container object
      * @param {HTMLElement} [config.container] - The HTML element in which the Wonderwall should be rendered in. default = overlay
      * @param {boolean} [config.inlineRender] - Renders Wonderwall directly in container instead of as overlay. default = false
+     * @param {boolean} [config.reloadOnNewAuth] - reload page if true after a new login or registration / no reload on already logged in user, default = false   
+ 
      * @param {Object} config.props - The props which will be passed to the Wonderwall web component.
      * @param {String} config.props.template - valid choices are "register" and "login"
      * @param {String} config.props.variant - variant of the brand that should be shown e.g bild or welt
      * @param {boolean} [config.props.abortable] - user can leave auth screen if true (not yet implemented)
-     * @param {boolean} [config.props.reloadOnNewAuth] - reload page if true after a new login or registration / no reload on already logged in user, default = false   
      * @param {String} [config.props.loginHeadline]
      * @param {String} [config.props.registerHeadline]
      * @param {String} [config.props.loginCta]
@@ -249,7 +250,6 @@ export type WonderwallProps = {
     template: "login" | "register";
     variant: WonderwallVariant;
     abortable?: boolean;
-    reloadOnNewAuth?: boolean;
     loginHeadline?: string;
     registerHeadline?: string;
     loginCta?: string;
@@ -259,6 +259,7 @@ export type WonderwallProps = {
 export interface AuthComponentConfig {
     container?: HTMLElement;
     inlineRender?: boolean;
+    reloadOnNewAuth?: boolean;
     props: WonderwallProps;
 }
 
