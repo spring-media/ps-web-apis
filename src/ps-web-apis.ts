@@ -278,8 +278,19 @@ export interface WaitingRoomV1 {
     waitForCapacity: WaitForCapacity;
 }
 
+
+export interface UnlockedContent {
+    type: 'article';
+    id: string;
+}
+
+export interface UnlockedContentResult {
+    content: UnlockedContent[];
+}
+
 export interface WalletV1 {
     getUserCreditBalance: GetUserCreditBalance;
+    getUserUnlockedContent: () => Promise<UnlockedContentResult>;
 }
 
 export type ILayer = "privacy" | "reject";
