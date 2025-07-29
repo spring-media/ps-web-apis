@@ -288,9 +288,24 @@ export interface UnlockedContentResult {
     content: UnlockedContent[];
 }
 
+export type UnlockNotificationResult = 
+    | {
+        status: 'ok';
+        result: {
+            contentId: string;
+            usedCredits: number;
+            remainingCredits: number;
+        };
+    }
+    | {
+        status: 'error';
+        result: null;
+    };
+
 export interface WalletV1 {
     getUserCreditBalance: GetUserCreditBalance;
     getUserUnlockedContent: () => Promise<UnlockedContentResult>;
+    reloadWithUnlockResultNotification: (unlockResult: UnlockNotificationResult) => void;
 }
 
 export type ILayer = "privacy" | "reject";
