@@ -201,8 +201,8 @@ export interface WhoamiV1 {
      * @param {Object} config - config container object
      * @param {HTMLElement} [config.container] - The HTML element in which the Wonderwall should be rendered in. default = overlay
      * @param {boolean} [config.inlineRender] - Renders Wonderwall directly in container instead of as overlay. default = false
-     * @param {boolean} [config.reloadOnNewAuth] - reload page if true after a new login or registration / no reload on already logged in user, default = false   
- 
+     * @param {boolean} [config.reloadOnNewAuth] - reload page if true after a new login or registration / no reload on already logged in
+     * user, default = false
      * @param {Object} config.props - The props which will be passed to the Wonderwall web component.
      * @param {String} config.props.template - valid choices are "register" and "login"
      * @param {String} config.props.variant - variant of the brand that should be shown e.g bild or welt
@@ -278,7 +278,6 @@ export interface WaitingRoomV1 {
     waitForCapacity: WaitForCapacity;
 }
 
-
 interface UnlockedContent {
     type: "article";
     id: string;
@@ -288,7 +287,7 @@ interface UnlockedContentResult {
     content: UnlockedContent[];
 }
 
-type UnlockFlowResult =
+export type WalletUnlockResult =
     | {
           status: "ok";
           result: {
@@ -312,7 +311,7 @@ export interface WalletV1 {
      *
      * @param unlockResult - The result of the unlock operation
      */
-    completeUnlockFlow: (unlockResult: UnlockFlowResult) => void;
+    completeUnlockFlow: (unlockResult: WalletUnlockResult) => void;
 }
 
 export type ILayer = "privacy" | "reject";
