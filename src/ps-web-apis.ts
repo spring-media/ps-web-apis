@@ -279,18 +279,40 @@ export interface WaitingRoomV1 {
 }
 
 
-export interface UnlockedContent {
-    type: 'article';
+interface UnlockedContent {
+    type: "article";
     id: string;
 }
 
-export interface UnlockedContentResult {
+interface UnlockedContentResult {
     content: UnlockedContent[];
 }
+
+type UnlockFlowResult =
+    | {
+          status: "ok";
+          result: {
+              contentId: string;
+              usedCredits: number;
+              remainingCredits: number;
+          };
+      }
+    | {
+          status: "error";
+          result: null;
+      };
 
 export interface WalletV1 {
     getUserCreditBalance: GetUserCreditBalance;
     getUserUnlockedContent: () => Promise<UnlockedContentResult>;
+    /**
+     * Completes the content unlock flow by persisting the unlock status
+     * and refreshing the page to activate the unlocked content.
+     * A notification will be shown after the refresh.
+     *
+     * @param unlockResult - The result of the unlock operation
+     */
+    completeUnlockFlow: (unlockResult: UnlockFlowResult) => void;
 }
 
 export type ILayer = "privacy" | "reject";
