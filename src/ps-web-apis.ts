@@ -294,6 +294,7 @@ export type WalletUnlockResult =
               contentId: string;
               usedCredits: number;
               remainingCredits: number;
+              validForDays: number;
           };
       }
     | {
