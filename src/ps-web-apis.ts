@@ -281,6 +281,7 @@ export interface WaitingRoomV1 {
 interface UnlockedContent {
     type: "article";
     id: string;
+    expiresAt: number;
 }
 
 interface UnlockedContentResult {
