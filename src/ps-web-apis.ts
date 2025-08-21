@@ -142,12 +142,15 @@ export interface WhoamiV1 {
      * @param optIn - A string representing the specific opt-in name.
      * This could be the new Marketing_AS_2024 or any other opt-in,
      * which are present in agreement.
+     * @param config - Optional. Object containing additional configuration options.
+     * @param config.enableReprompt - Enable prompting a user again if they declined previously
+     *                                and enough time has passed.
      *
      * @returns A promise that resolves to an object indicating whether the user opted in
      *          successfully (`success: true`) or not, along with a `reason` if applicable.
      *          Possible reasons include "userNotLoggedIn", "generalError", or "userAborted".
      */
-    ensureUserHasOptin(optIn: string): Promise<UserDataRequestResult>;
+    ensureUserHasOptin(optIn: string, config?: { enableReprompt?: boolean }): Promise<UserDataRequestResult>;
     /**
      * will start login-process (e.g. go to sso-login)
      */
