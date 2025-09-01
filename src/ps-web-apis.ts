@@ -307,7 +307,7 @@ export type WalletUnlockResult =
       };
 
 export interface WalletV1 {
-    getUserWalletStatus: Promise<{ isEnabled: boolean }>;
+    getUserWalletStatus: () => Promise<{ isEnabled: boolean }>;
     getUserCreditBalance: GetUserCreditBalance;
     getUserUnlockedContent: () => Promise<UnlockedContentResult>;
     /**
