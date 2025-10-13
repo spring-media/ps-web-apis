@@ -257,6 +257,7 @@ export type WonderwallProps = {
     registerHeadline?: string;
     loginCta?: string;
     registerCta?: string;
+    allowClosing?: boolean;
 };
 
 export interface AuthComponentConfig {
