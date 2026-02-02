@@ -349,6 +349,18 @@ export interface ICligV1 {
 }
 export type ICligV2 = (app: IApp) => Promise<{ open: (layer: ILayer) => void }>;
 
+export interface VorteileItem {
+    id: string;
+    title: string;
+    description: string;
+    image: string;
+    ctaLink: string;
+}
+
+export interface VorteileV1 {
+    getVorteile(): Promise<{ items: VorteileItem[] }>;
+}
+
 export function whoamiV1(): Promise<WhoamiV1> {
     return requirePackage("whoami:v1");
 }
@@ -375,6 +387,10 @@ export function CligV1(): Promise<ICligV1> {
 
 export function CligV2(): Promise<ICligV2> {
     return requirePackage("clig:v2");
+}
+
+export function vorteileV1(): Promise<VorteileV1> {
+    return requirePackage("vorteile:v1");
 }
 
 export const provideApi = provide;
