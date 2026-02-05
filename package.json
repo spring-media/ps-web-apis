@@ -1,6 +1,6 @@
 {
   "name": "@spring-media/ps-web-apis",
-  "version": "1.11.14",
+  "version": "1.11.15",
   "description": "",
   "main": "dist/ps-web-apis.cjs.js",
   "module": "dist/ps-web-apis.esm.js",
