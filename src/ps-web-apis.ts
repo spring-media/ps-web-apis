@@ -274,8 +274,71 @@ export interface UtilsV1 {
     registerIframeMessageListener: RegisterIframeMessageListener;
 }
 
+/**
+ * @deprecated Use `UserSegmentationV1` instead for more robust percentage rollouts and A/B testing.
+ * The new API supports independent segment assignments, nested tests, and multiple groups.
+ */
 export interface AbV1 {
-    userInTestGroupForFeature: (key: string) => { canSeeFeature: boolean; testGroup: "A" | "B" };
+    userInTestGroupForFeature: (
+        key: string
+    ) => {
+        canSeeFeature: boolean;
+        testGroup: "A" | "B";
+    };
+}
+
+/**
+ * Configuration for defining a user segment.
+ * @template T - Record of group names to their percentage allocation
+ */
+export interface SegmentConfig<T extends Record<string, number> = Record<string, never>> {
+    /** Unique identifier for the segment */
+    name: string;
+    /** Percentage of users to include in this segment (0-100). Defaults to 100. */
+    percentage?: number;
+    /** Optional groups within the segment. Percentages must sum to 100. */
+    groups?: T;
+}
+
+/**
+ * Represents a defined user segment with methods to check membership.
+ * @template T - Record of group names to their percentage allocation
+ */
+export interface Segment<T extends Record<string, number> = Record<string, never>> {
+    /** Returns true if the user is in this segment (within the percentage). */
+    isInSegment: () => boolean;
+    /** Returns true if the user is in the specified group within this segment. */
+    isInSegmentGroup: (key: keyof T) => boolean;
+    /** Returns the raw segment value (0-99) for this user. */
+    getValue: () => number;
+}
+
+/**
+ * User Segmentation API for percentage rollouts and A/B testing.
+ *
+ * @example
+ * // Simple rollout to 20% of users
+ * const checkout = segmentation.define({ name: "new-checkout", percentage: 20 });
+ * if (checkout.isInSegment()) {
+ *   showNewCheckout();
+ * }
+ *
+ * @example
+ * // A/B test with groups
+ * const test = segmentation.define({
+ *   name: "paywall-test",
+ *   percentage: 20,
+ *   groups: { "old": 70, "new": 30 }
+ * });
+ * if (test.isInSegmentGroup("old")) {
+ *   showOldPaywall();
+ * } else if (test.isInSegmentGroup("new")) {
+ *   showNewPaywall();
+ * }
+ */
+export interface UserSegmentationV1 {
+    /** Define a user segment with optional groups. */
+    define: <T extends Record<string, number>>(config: SegmentConfig<T>) => Segment<T>;
 }
 
 export interface WaitingRoomV1 {
@@ -361,8 +424,15 @@ export function waitingRoomV1(): Promise<WaitingRoomV1> {
     return requireApi("waiting_room:v1");
 }
 
+/**
+ * @deprecated Use `userSegmentationV1()` instead for more robust percentage rollouts and A/B testing.
+ */
 export function abV1(): Promise<AbV1> {
     return requirePackage("ab:v1");
+}
+
+export function userSegmentationV1(): Promise<UserSegmentationV1> {
+    return requirePackage("userSegmentation:v1");
 }
 
 export function walletV1(): Promise<WalletV1> {

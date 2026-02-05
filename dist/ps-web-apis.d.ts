@@ -94,12 +94,17 @@ export interface WhoamiV1 {
      * @param optIn - A string representing the specific opt-in name.
      * This could be the new Marketing_AS_2024 or any other opt-in,
      * which are present in agreement.
+     * @param config - Optional. Object containing additional configuration options.
+     * @param config.enableReprompt - Enable prompting a user again if they declined previously
+     *                                and enough time has passed.
      *
      * @returns A promise that resolves to an object indicating whether the user opted in
      *          successfully (`success: true`) or not, along with a `reason` if applicable.
      *          Possible reasons include "userNotLoggedIn", "generalError", or "userAborted".
      */
-    ensureUserHasOptin(optIn: string): Promise<UserDataRequestResult>;
+    ensureUserHasOptin(optIn: string, config?: {
+        enableReprompt?: boolean;
+    }): Promise<UserDataRequestResult>;
     /**
      * will start login-process (e.g. go to sso-login)
      */
@@ -151,6 +156,8 @@ export interface WhoamiV1 {
      * @param {Object} config - config container object
      * @param {HTMLElement} [config.container] - The HTML element in which the Wonderwall should be rendered in. default = overlay
      * @param {boolean} [config.inlineRender] - Renders Wonderwall directly in container instead of as overlay. default = false
+     * @param {boolean} [config.reloadOnNewAuth] - reload page if true after a new login or registration / no reload on already logged in
+     * user, default = false
      * @param {Object} config.props - The props which will be passed to the Wonderwall web component.
      * @param {String} config.props.template - valid choices are "register" and "login"
      * @param {String} config.props.variant - variant of the brand that should be shown e.g bild or welt
@@ -186,10 +193,12 @@ export declare type WonderwallProps = {
     registerHeadline?: string;
     loginCta?: string;
     registerCta?: string;
+    allowClosing?: boolean;
 };
 export interface AuthComponentConfig {
     container?: HTMLElement;
     inlineRender?: boolean;
+    reloadOnNewAuth?: boolean;
     props: WonderwallProps;
 }
 export interface UtilsV1 {
@@ -198,17 +207,104 @@ export interface UtilsV1 {
     getOverwritableRosettaEnvByKey: GetRosettaEnvByKey;
     registerIframeMessageListener: RegisterIframeMessageListener;
 }
+/**
+ * @deprecated Use `UserSegmentationV1` instead for more robust percentage rollouts and A/B testing.
+ * The new API supports independent segment assignments, nested tests, and multiple groups.
+ */
 export interface AbV1 {
     userInTestGroupForFeature: (key: string) => {
         canSeeFeature: boolean;
         testGroup: "A" | "B";
     };
 }
+/**
+ * Configuration for defining a user segment.
+ * @template T - Record of group names to their percentage allocation
+ */
+export interface SegmentConfig<T extends Record<string, number> = Record<string, never>> {
+    /** Unique identifier for the segment */
+    name: string;
+    /** Percentage of users to include in this segment (0-100). Defaults to 100. */
+    percentage?: number;
+    /** Optional groups within the segment. Percentages must sum to 100. */
+    groups?: T;
+}
+/**
+ * Represents a defined user segment with methods to check membership.
+ * @template T - Record of group names to their percentage allocation
+ */
+export interface Segment<T extends Record<string, number> = Record<string, never>> {
+    /** Returns true if the user is in this segment (within the percentage). */
+    isInSegment: () => boolean;
+    /** Returns true if the user is in the specified group within this segment. */
+    isInSegmentGroup: (key: keyof T) => boolean;
+    /** Returns the raw segment value (0-99) for this user. */
+    getValue: () => number;
+}
+/**
+ * User Segmentation API for percentage rollouts and A/B testing.
+ *
+ * @example
+ * // Simple rollout to 20% of users
+ * const checkout = segmentation.define({ name: "new-checkout", percentage: 20 });
+ * if (checkout.isInSegment()) {
+ *   showNewCheckout();
+ * }
+ *
+ * @example
+ * // A/B test with groups
+ * const test = segmentation.define({
+ *   name: "paywall-test",
+ *   percentage: 20,
+ *   groups: { "old": 70, "new": 30 }
+ * });
+ * if (test.isInSegmentGroup("old")) {
+ *   showOldPaywall();
+ * } else if (test.isInSegmentGroup("new")) {
+ *   showNewPaywall();
+ * }
+ */
+export interface UserSegmentationV1 {
+    /** Define a user segment with optional groups. */
+    define: <T extends Record<string, number>>(config: SegmentConfig<T>) => Segment<T>;
+}
 export interface WaitingRoomV1 {
     waitForCapacity: WaitForCapacity;
 }
+interface UnlockedContent {
+    type: "article";
+    id: string;
+    expiresAt: number;
+}
+interface UnlockedContentResult {
+    content: UnlockedContent[];
+}
+export declare type WalletUnlockResult = {
+    status: "ok";
+    result: {
+        contentId: string;
+        usedCredits: number;
+        remainingCredits: number;
+        validForDays: number;
+    };
+} | {
+    status: "error";
+    result: null;
+};
 export interface WalletV1 {
+    getUserWalletStatus: () => Promise<{
+        isEnabled: boolean;
+    }>;
     getUserCreditBalance: GetUserCreditBalance;
+    getUserUnlockedContent: () => Promise<UnlockedContentResult>;
+    /**
+     * Completes the content unlock flow by persisting the unlock status
+     * and refreshing the page to activate the unlocked content.
+     * A notification will be shown after the refresh.
+     *
+     * @param unlockResult - The result of the unlock operation
+     */
+    completeUnlockFlow: (unlockResult: WalletUnlockResult) => void;
 }
 export declare type ILayer = "privacy" | "reject";
 export declare type IApp = "offerpage" | "checkout" | "cancellation";
@@ -240,7 +336,11 @@ export declare type ICligV2 = (app: IApp) => Promise<{
 export declare function whoamiV1(): Promise<WhoamiV1>;
 export declare function utilsV1(): Promise<UtilsV1>;
 export declare function waitingRoomV1(): Promise<WaitingRoomV1>;
+/**
+ * @deprecated Use `userSegmentationV1()` instead for more robust percentage rollouts and A/B testing.
+ */
 export declare function abV1(): Promise<AbV1>;
+export declare function userSegmentationV1(): Promise<UserSegmentationV1>;
 export declare function walletV1(): Promise<WalletV1>;
 export declare function CligV1(): Promise<ICligV1>;
 export declare function CligV2(): Promise<ICligV2>;
