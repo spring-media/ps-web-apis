@@ -81,8 +81,14 @@ function utilsV1() {
 function waitingRoomV1() {
     return requireApi("waiting_room:v1");
 }
+/**
+ * @deprecated Use `userSegmentationV1()` instead for more robust percentage rollouts and A/B testing.
+ */
 function abV1() {
     return requirePackage("ab:v1");
+}
+function userSegmentationV1() {
+    return requirePackage("userSegmentation:v1");
 }
 function walletV1() {
     return requirePackage("wallet:v1");
@@ -101,6 +107,7 @@ exports.CligV2 = CligV2;
 exports.abV1 = abV1;
 exports.provideApi = provideApi;
 exports.requireApi = requireApi;
+exports.userSegmentationV1 = userSegmentationV1;
 exports.utilsV1 = utilsV1;
 exports.waitingRoomV1 = waitingRoomV1;
 exports.walletV1 = walletV1;
