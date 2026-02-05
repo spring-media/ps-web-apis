@@ -309,6 +309,8 @@ export interface Segment<T extends Record<string, number> = Record<string, never
     isInSegment: () => boolean;
     /** Returns true if the user is in the specified group within this segment. */
     isInSegmentGroup: (key: keyof T) => boolean;
+    /** Returns the segment group name the user is in, or null if not in any group. */
+    getSegmentGroupName: () => keyof T | null;
     /** Returns the raw segment value (0-99) for this user. */
     getValue: () => number;
 }
