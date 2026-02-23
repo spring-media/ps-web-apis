@@ -8,7 +8,6 @@ env:
   GITHUB_TOKEN: ${{ secrets.PS_GITHUB_ACCESSTOKEN }}
   GITHUB_AXEL_NPM_TOKEN: ${{ secrets.PS_GITHUB_AXELSPRINGER_PACKAGEPUBLISH }}
 
-
 jobs:
   checks:
     name: Formatting checks
@@ -21,7 +20,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "16"
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Configure npm
         run: |
@@ -44,7 +43,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "16"
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: config npm
         run: |
@@ -63,8 +62,6 @@ jobs:
           git remote add publisher "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           yarn version --patch
           git push publisher HEAD:master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build yarn
         run: yarn build
