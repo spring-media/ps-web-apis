@@ -4,6 +4,10 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+  packages: read
+
 env:
   GITHUB_TOKEN: ${{ secrets.PS_GITHUB_ACCESSTOKEN }}
   GITHUB_AXEL_NPM_TOKEN: ${{ secrets.PS_GITHUB_AXELSPRINGER_PACKAGEPUBLISH }}
@@ -62,6 +66,8 @@ jobs:
           git remote add publisher "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           yarn version --patch
           git push publisher HEAD:master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build yarn
         run: yarn build
