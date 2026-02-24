@@ -289,8 +289,8 @@ export interface SusanEnvConfig {
     environments?: string[];
 }
 export interface SusanEnv {
-    getCurrent(): string;
-    isOverridden(): boolean;
+    getCurrentEnv(): string;
+    isEnvOverridden(): boolean;
 }
 export interface SusanV1 {
     registerFeature(config: SusanFeatureConfig): SusanFeature;
