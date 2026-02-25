@@ -365,8 +365,8 @@ export interface SusanEnvConfig {
 }
 
 export interface SusanEnv {
-    getCurrent(): string;
-    isOverridden(): boolean;
+    getCurrentEnv(): string;
+    isEnvOverridden(): boolean;
 }
 
 export interface SusanV1 {
