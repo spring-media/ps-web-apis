@@ -343,37 +343,6 @@ export interface UserSegmentationV1 {
     define: <T extends Record<string, number>>(config: SegmentConfig<T>) => Segment<T>;
 }
 
-export interface SusanFeatureConfig {
-    name: string;
-    label?: string;
-    group?: string;
-    options?: string[];
-    cb?: () => void;
-    /** Restrict visibility to specific TLDs (e.g. ['welt.de', 'bild.de']). Visible on all domains if omitted. */
-    domains?: string[];
-}
-
-export interface SusanFeature {
-    isActive(): boolean;
-    getValue(): string | undefined;
-}
-
-export interface SusanEnvConfig {
-    cookieName: string;
-    label?: string;
-    environments?: string[];
-}
-
-export interface SusanEnv {
-    getCurrentEnv(): string;
-    isEnvOverridden(): boolean;
-}
-
-export interface SusanV1 {
-    registerFeature(config: SusanFeatureConfig): SusanFeature;
-    registerEnv(config: SusanEnvConfig): SusanEnv;
-}
-
 export interface WaitingRoomV1 {
     waitForCapacity: WaitForCapacity;
 }
@@ -470,10 +439,6 @@ export function userSegmentationV1(): Promise<UserSegmentationV1> {
 
 export function walletV1(): Promise<WalletV1> {
     return requirePackage("wallet:v1");
-}
-
-export function susanV1(): Promise<SusanV1> {
-    return requirePackage("susan:v1");
 }
 
 export function CligV1(): Promise<ICligV1> {

@@ -93,9 +93,6 @@ function userSegmentationV1() {
 function walletV1() {
     return requirePackage("wallet:v1");
 }
-function susanV1() {
-    return requirePackage("susan:v1");
-}
 function CligV1() {
     return requirePackage("ppclig:v1");
 }
@@ -110,7 +107,6 @@ exports.CligV2 = CligV2;
 exports.abV1 = abV1;
 exports.provideApi = provideApi;
 exports.requireApi = requireApi;
-exports.susanV1 = susanV1;
 exports.userSegmentationV1 = userSegmentationV1;
 exports.utilsV1 = utilsV1;
 exports.waitingRoomV1 = waitingRoomV1;

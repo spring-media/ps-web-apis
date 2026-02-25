@@ -89,9 +89,6 @@ function userSegmentationV1() {
 function walletV1() {
     return requirePackage("wallet:v1");
 }
-function susanV1() {
-    return requirePackage("susan:v1");
-}
 function CligV1() {
     return requirePackage("ppclig:v1");
 }
@@ -101,4 +98,4 @@ function CligV2() {
 var provideApi = provide;
 var requireApi = requirePackage;
 
-export { CligV1, CligV2, abV1, provideApi, requireApi, susanV1, userSegmentationV1, utilsV1, waitingRoomV1, walletV1, whoamiV1 };
+export { CligV1, CligV2, abV1, provideApi, requireApi, userSegmentationV1, utilsV1, waitingRoomV1, walletV1, whoamiV1 };
